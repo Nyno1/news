@@ -1,50 +1,258 @@
-# Welcome to your Expo app 👋
+# Ibadah & News Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## About The Project
 
-## Get started
+This is a cross-platform mobile application for religious worship (ibadah) management and news distribution. The system allows users to access prayer schedules, religious articles, worship resources, and stay updated with the latest community news. Built with React Native and TypeScript for the frontend and Laravel for the backend API, this application delivers a seamless mobile experience across iOS and Android devices.
 
-1. Install dependencies
+## Features
 
+### Ibadah Module
+- Prayer/Worship schedules and calendar
+- Religious event management
+- Scripture and religious readings
+- Sermon archives and audio/video streaming
+- Online donation system
+- Community member directory
+- Spiritual resource library
+- Prayer reminders and notifications
+
+### News Module
+- Latest community news and announcements
+- Event coverage and reporting
+- Push notification for breaking news
+- Content categorization and tagging
+- Featured articles and highlights
+- Media gallery (photos, videos)
+- Comment and interaction system
+- Offline reading mode
+
+## Tech Stack
+
+### Frontend (Mobile)
+- React Native
+- TypeScript (TSX)
+- React Navigation
+- Redux/Context API for state management
+- Axios for API requests
+- React Native Paper/UI Kitten for UI components
+- React Native Vector Icons
+
+### Backend (API)
+- Laravel (PHP framework)
+- MySQL/PostgreSQL database
+- JWT Authentication
+- RESTful API architecture
+- File storage for media content
+
+## Prerequisites
+
+### For Frontend Development
+- Node.js (v14.0.0 or higher)
+- npm or yarn
+- React Native CLI
+- Android Studio (for Android development)
+- Xcode (for iOS development, macOS only)
+- JDK 11
+- TypeScript
+
+### For Backend Development
+- PHP >= 8.1
+- Composer
+- MySQL/PostgreSQL
+- Required PHP extensions (BCMath, Ctype, JSON, etc.)
+
+## Installation
+
+### Setting up the Backend (Laravel API)
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/username/ibadah-news-app.git
+   ```
+
+2. Navigate to the backend directory
+   ```bash
+   cd ibadah-news-app/backend
+   ```
+
+3. Install PHP dependencies
+   ```bash
+   composer install
+   ```
+
+4. Create and configure .env file
+   ```bash
+   cp .env.example .env
+   # Edit database and other configurations
+   ```
+
+5. Generate application key
+   ```bash
+   php artisan key:generate
+   ```
+
+6. Run migrations and seeders
+   ```bash
+   php artisan migrate --seed
+   ```
+
+7. Generate JWT secret
+   ```bash
+   php artisan jwt:secret
+   ```
+
+8. Start the development server
+   ```bash
+   php artisan serve
+   ```
+
+### Setting up the Frontend (React Native)
+
+1. Navigate to the frontend directory
+   ```bash
+   cd ibadah-news-app/frontend
+   ```
+
+2. Install dependencies
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
-2. Start the app
-
+3. Create and configure .env file for API endpoint
    ```bash
-   npx expo start
+   cp .env.example .env
+   # Edit API_URL and other configurations
    ```
 
-In the output, you'll find options to open the app in a
+4. Start Metro bundler
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+5. Run on Android
+   ```bash
+   npm run android
+   # or
+   yarn android
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+6. Run on iOS (macOS only)
+   ```bash
+   npm run ios
+   # or
+   yarn ios
+   ```
 
-## Get a fresh project
+## Project Structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+### Frontend Structure
+```
+frontend/
+├── src/
+│   ├── assets/        # Images, fonts, etc.
+│   ├── components/    # Reusable components
+│   │   ├── ibadah/    # Ibadah module components
+│   │   ├── news/      # News module components
+│   │   └── shared/    # Common components
+│   ├── navigation/    # React Navigation setup
+│   ├── screens/       # Screen components
+│   │   ├── ibadah/    # Ibadah screens
+│   │   ├── news/      # News screens
+│   │   └── auth/      # Authentication screens
+│   ├── services/      # API services
+│   ├── store/         # Redux/Context store
+│   ├── types/         # TypeScript type definitions
+│   ├── utils/         # Utility functions
+│   └── App.tsx        # Root component
+├── .env               # Environment variables
+├── tsconfig.json      # TypeScript configuration
+└── package.json       # Dependencies
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Backend Structure
+```
+backend/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── API/
+│   │   │   │   ├── IbadahController.php
+│   │   │   │   └── NewsController.php
+│   │   ├── Middleware/
+│   │   └── Resources/    # API Resources
+│   ├── Models/
+│   │   ├── Ibadah.php
+│   │   ├── News.php
+│   │   └── User.php
+│   └── Services/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── routes/
+│   └── api.php
+└── config/
+```
 
-## Learn more
+## API Endpoints
 
-To learn more about developing your project with Expo, look at the following resources:
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login and get JWT token
+- `POST /api/auth/logout` - Logout and invalidate token
+- `GET /api/auth/user` - Get authenticated user
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Ibadah Module
+- `GET /api/ibadah/schedules` - Get prayer schedules
+- `GET /api/ibadah/events` - Get worship events
+- `GET /api/ibadah/resources` - Get spiritual resources
+- `GET /api/ibadah/sermons` - Get sermon archives
 
-## Join the community
+### News Module
+- `GET /api/news` - Get all news articles
+- `GET /api/news/{id}` - Get specific news article
+- `GET /api/news/categories` - Get news categories
+- `POST /api/news/{id}/comments` - Add comment to news
 
-Join our community of developers creating universal apps.
+## Building for Production
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Frontend
+```bash
+cd frontend
+npm run build:android
+# or
+npm run build:ios
+```
+
+### Backend
+1. Configure your production environment variables
+2. Optimize Composer autoloader
+   ```bash
+   composer install --optimize-autoloader --no-dev
+   ```
+3. Set up proper web server configuration
+4. Set up proper database backup strategies
+
+## Additional Resources
+
+- [React Native Documentation](https://reactnative.dev/docs/getting-started)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [Laravel Documentation](https://laravel.com/docs)
+- [React Navigation Documentation](https://reactnavigation.org/docs/getting-started)
+
+## Contributing
+
+Please read the contribution guidelines before submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgements
+
+- [React Native Community](https://github.com/react-native-community)
+- [Laravel Community](https://laravel.com/docs/contributions)
+- [Open Source Initiatives](https://opensource.org/)
